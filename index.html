@@ -88,118 +88,83 @@
             100% { transform: rotate(360deg); }
         }
 
-        .floating-cart {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .floating-cart-btn {
-            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 18px 28px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 8px 32px rgba(220, 38, 38, 0.5);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .floating-cart-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 48px rgba(220, 38, 38, 0.6);
-        }
-
-        .cart-badge {
-            background: white;
-            color: #DC2626;
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 15px;
-            font-weight: 900;
-        }
-
-        .floating-cart-panel {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            border: 2px solid rgba(0, 0, 0, 0.1);
-            width: 380px;
-            max-height: 600px;
-            z-index: 999;
-            display: none;
-            flex-direction: column;
-        }
-
-        .floating-cart-panel.open {
-            display: flex;
-        }
-
-        .cart-panel-header {
-            padding: 24px;
-            border-bottom: 2px solid rgba(220, 38, 38, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cart-panel-body {
-            padding: 20px;
-            overflow-y: auto;
-            flex: 1;
-            max-height: 400px;
-        }
-
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px;
+            padding: 12px;
             background: rgba(245, 245, 245, 0.6);
-            border-radius: 12px;
-            margin-bottom: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
             border: 1px solid rgba(0, 0, 0, 0.08);
         }
-
-        .cart-panel-footer {
-            padding: 24px;
-            border-top: 2px solid rgba(220, 38, 38, 0.2);
-            background: rgba(245, 245, 245, 0.8);
+        
+        .category-menu-item {
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 700;
+            color: #000000;
+            font-size: 14px;
         }
-
-        @media (max-width: 480px) {
-            .floating-cart-panel {
-                width: calc(100vw - 32px);
-                right: 16px;
-                bottom: 16px;
-            }
-            
-            .floating-cart {
-                right: 16px;
-                bottom: 16px;
+        
+        .category-menu-item:hover {
+            background: rgba(220, 38, 38, 0.1);
+            border-color: rgba(220, 38, 38, 0.4);
+            transform: translateX(4px);
+        }
+        
+        @media (max-width: 640px) {
+            #header-title {
+                display: none !important;
             }
         }
     </style>
   <style>@view-transition { navigation: auto; }</style>
  </head>
  <body>
-  <div id="app" style="width: 100%; min-height: 100%; background: #FFFFFF; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;"><!-- Hero Section with Background Pattern -->
+  <div id="app" style="width: 100%; min-height: 100%; background: #FFFFFF; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;"><!-- Fixed Header Bar with Cart Info -->
+   <div id="cart-header-bar" style="position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); padding: 12px 16px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); border-bottom: 2px solid rgba(220, 38, 38, 0.2); width: 100%;">
+    <div style="max-width: 1200px; margin: 0 auto;"><!-- Main header row with hamburgers and cart -->
+     <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px;"><!-- Left: Categories Hamburger Menu --> <button id="btn-categories-menu" style="background: rgba(0, 0, 0, 0.05); color: #000000; padding: 8px 12px; border: 2px solid rgba(0, 0, 0, 0.1); border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s; display: none; white-space: nowrap;" onmouseover="this.style.background='rgba(0, 0, 0, 0.1)'" onmouseout="this.style.background='rgba(0, 0, 0, 0.05)'"> ☰ Categorías </button> <!-- Center: Restaurant name (hidden on small screens when in products step) -->
+      <div id="header-title" style="flex: 1; text-align: center; font-size: 18px; font-weight: 900; color: #DC2626;">
+       🍗 El Pollón
+      </div><!-- Right: Cart Button --> <button id="btn-view-cart" style="background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%); color: #000000; padding: 8px 12px; border: none; border-radius: 8px; font-size: 14px; font-weight: 900; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(252, 211, 77, 0.4); display: flex; align-items: center; gap: 8px; position: relative; white-space: nowrap;" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 16px rgba(252, 211, 77, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(252, 211, 77, 0.4)'"> 🛒 Carrito <span id="cart-badge-header" style="background: #000000; color: #FCD34D; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900;">0</span> </button>
+     </div><!-- Progress Bar (thin, no border) -->
+     <div id="progress-container" style="display: none; margin-top: 8px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px;"><span id="remaining-amount-header" style="font-size: 11px; color: rgba(0, 0, 0, 0.6); font-weight: 600;">Faltan $200.000 para mínimo</span> <span id="progress-percentage" style="font-size: 12px; font-weight: 900; color: #DC2626;">0%</span>
+      </div>
+      <div id="minimum-progress-header" style="width: 100%; height: 4px; background: rgba(0, 0, 0, 0.1); border-radius: 0; overflow: hidden;">
+       <div id="progress-bar-header" style="height: 100%; background: linear-gradient(90deg, #DC2626, #F59E0B, #16A34A); width: 0%; transition: width 0.5s ease;"></div>
+      </div>
+     </div><!-- Categories Dropdown Menu -->
+     <div id="categories-dropdown" style="position: absolute; top: 100%; left: 16px; margin-top: 8px; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); border: 2px solid rgba(0, 0, 0, 0.1); min-width: 250px; max-width: 90vw; z-index: 999; display: none; flex-direction: column; overflow: hidden;">
+      <div style="padding: 16px; border-bottom: 2px solid rgba(220, 38, 38, 0.2); display: flex; justify-content: space-between; align-items: center;">
+       <h3 style="font-size: 16px; font-weight: 700; color: #000000; margin: 0;">📂 Categorías</h3><button id="close-categories-dropdown" style="background: none; border: none; font-size: 24px; color: #000000; cursor: pointer; padding: 0; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;">×</button>
+      </div>
+      <div style="padding: 12px;" id="categories-dropdown-body"><!-- Categories will be rendered here -->
+      </div>
+     </div><!-- Cart Panel Dropdown -->
+     <div id="cart-dropdown-panel" style="position: absolute; top: 100%; right: 16px; margin-top: 8px; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); border: 2px solid rgba(0, 0, 0, 0.1); min-width: 320px; max-width: 90vw; max-height: 70vh; z-index: 999; display: none; flex-direction: column; overflow: hidden;">
+      <div style="padding: 16px; border-bottom: 2px solid rgba(220, 38, 38, 0.2); display: flex; justify-content: space-between; align-items: center;">
+       <h3 style="font-size: 16px; font-weight: 700; color: #000000; margin: 0;">🛒 Tu Carrito</h3><button id="close-cart-dropdown" style="background: none; border: none; font-size: 24px; color: #000000; cursor: pointer; padding: 0; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;">×</button>
+      </div>
+      <div style="padding: 16px; overflow-y: auto; flex: 1;" id="cart-dropdown-body"><!-- Cart items will be rendered here -->
+      </div>
+      <div style="padding: 16px; border-top: 2px solid rgba(220, 38, 38, 0.2); background: rgba(220, 38, 38, 0.05);">
+       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;"><span style="font-size: 16px; font-weight: 700; color: #000000;">Total:</span> <span id="cart-total-dropdown" style="font-size: 20px; font-weight: 900; color: #DC2626;">$0</span>
+       </div><button id="btn-continue-to-data" style="width: 100%; background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); color: white; padding: 14px; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 16px rgba(220, 38, 38, 0.4);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(220, 38, 38, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 16px rgba(220, 38, 38, 0.4)'"> Continuar a Datos → </button>
+       <div id="cart-minimum-warning" style="display: none; margin-top: 12px; background: rgba(245, 158, 11, 0.15); border: 2px solid rgba(245, 158, 11, 0.4); border-radius: 10px; padding: 12px; text-align: center;">
+        <div style="font-size: 12px; font-weight: 700; color: #B45309; line-height: 1.5;"></div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Hero Section with Background Pattern -->
    <div style="width: 100%; background: linear-gradient(180deg, rgba(220, 38, 38, 0.05) 0%, rgba(255, 255, 255, 0) 100%), repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.01) 10px, rgba(0, 0, 0, 0.01) 20px); padding: 40px 24px 60px; position: relative; overflow: hidden;">
     <div style="position: absolute; top: -50%; left: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, transparent 70%); border-radius: 50%; filter: blur(60px);"></div>
     <div style="position: absolute; bottom: -50%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, transparent 70%); border-radius: 50%; filter: blur(60px);"></div>
@@ -443,12 +408,6 @@
       </div>
       <div id="products-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin-bottom: 32px;"><!-- Products will be generated here -->
       </div>
-      <div style="background: rgba(220, 38, 38, 0.08); backdrop-filter: blur(10px); padding: 24px; border-radius: 16px; margin-bottom: 32px; border: 2px solid rgba(220, 38, 38, 0.2);">
-       <div style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 24px; font-weight: 800; color: #000000;">Total:</span> <span id="total-price" style="font-size: 36px; font-weight: 900; color: #DC2626;">$0</span>
-       </div>
-      </div>
-      <div style="display: flex; gap: 16px;"><button id="btn-products-back" style="flex: 1; background: rgba(0, 0, 0, 0.03); backdrop-filter: blur(10px); color: #000000; padding: 18px; border: 2px solid rgba(0, 0, 0, 0.1); border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(0, 0, 0, 0.08)'; this.style.borderColor='rgba(0, 0, 0, 0.2)'" onmouseout="this.style.background='rgba(0, 0, 0, 0.03)'; this.style.borderColor='rgba(0, 0, 0, 0.1)'"> ← Atrás </button> <button id="btn-products-next" style="flex: 2; background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); color: white; padding: 18px; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 24px rgba(220, 38, 38, 0.4);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 32px rgba(220, 38, 38, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 24px rgba(220, 38, 38, 0.4)'"> Continuar a Datos → </button>
-      </div>
      </div><!-- Step 4: Customer Data -->
      <div id="data-step" style="display: none;">
       <h2 style="font-size: 36px; font-weight: 900; color: #000000; margin-bottom: 32px; letter-spacing: -0.5px;">Completa tus Datos</h2><!-- Summary -->
@@ -476,24 +435,11 @@
      </div><!-- Success Message -->
      <div id="success-message" style="display: none; text-align: center;">
       <div style="font-size: 72px; margin-bottom: 20px;">
-       ��
+       ✅
       </div>
       <h2 style="font-size: 32px; font-weight: 700; color: #16A34A; margin-bottom: 16px;">¡Reserva Enviada!</h2>
       <p style="font-size: 18px; color: #6B7280; margin-bottom: 24px;">Tu reserva ha sido enviada por WhatsApp correctamente.</p><button id="btn-new-reservation" style="background: #DC2626; color: white; padding: 16px 32px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#B91C1C'" onmouseout="this.style.background='#DC2626'"> Nueva Reserva </button>
      </div>
-    </div>
-   </div><!-- Floating Cart Button (only visible in products step) -->
-   <div id="floating-cart" class="floating-cart" style="display: none;"><button class="floating-cart-btn" id="floating-cart-btn"> 🛒 Ver Carrito <span class="cart-badge" id="cart-badge">0</span> </button>
-   </div><!-- Floating Cart Panel -->
-   <div id="floating-cart-panel" class="floating-cart-panel">
-    <div class="cart-panel-header">
-     <h3 style="font-size: 20px; font-weight: 700; color: #000000; margin: 0;">🛒 Tu Carrito</h3><button id="close-cart-panel" style="background: none; border: none; font-size: 24px; color: #000000; cursor: pointer; padding: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">×</button>
-    </div>
-    <div class="cart-panel-body" id="cart-panel-body"><!-- Cart items will be rendered here -->
-    </div>
-    <div class="cart-panel-footer">
-     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;"><span style="font-size: 18px; font-weight: 700; color: #000000;">Total:</span> <span id="floating-total" style="font-size: 24px; font-weight: 800; color: #DC2626;">$0</span>
-     </div><button id="floating-continue-btn" style="width: 100%; background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); color: white; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(220, 38, 38, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(220, 38, 38, 0.4)'"> Continuar a Datos → </button>
     </div>
    </div>
   </div>
@@ -504,19 +450,19 @@
             { id: 2, name: 'Oferton mas fideo', category: '👨‍👩‍👧‍👦 Ofertas Familiares', price: 24500, description: 'Pollo entero, papas fritas, fideos al pesto, ensalada y bebidas 1.5lt', image: 'https://images.unsplash.com/photo-1633964913295-ceb438267482?w=400&h=300&fit=crop' },
             { id: 3, name: 'Oferton mas chaufa pura papa', category: '👨‍👩‍👧‍👦 Ofertas Familiares', price: 24500, description: 'Pollo entero, papas fritas, extra papa frita, arroz chaufa y bebidas 1.5lt', image: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&h=300&fit=crop' },
             { id: 4, name: 'Oferton con fideo', category: '👨‍👩‍👧‍👦 Ofertas Familiares', price: 23500, description: 'Pollo entero, papas fritas, fideos al pesto y bebidas 1.5lt', image: 'https://images.unsplash.com/photo-1632334342937-2fda8e3448a2?w=400&h=300&fit=crop' },
-            { id: 5, name: 'Oferton sin ensalada', category: '👨‍👩‍������‍👦 Ofertas Familiares', price: 23500, description: 'Pollo entero, papas fritas, arroz chaufa y bebidas 1.5lt', image: 'https://images.unsplash.com/photo-1594221708779-94832f4320d1?w=400&h=300&fit=crop' },
+            { id: 5, name: 'Oferton sin ensalada', category: '👨‍👩‍👧‍👦 Ofertas Familiares', price: 23500, description: 'Pollo entero, papas fritas, arroz chaufa y bebidas 1.5lt', image: 'https://images.unsplash.com/photo-1594221708779-94832f4320d1?w=400&h=300&fit=crop' },
             { id: 6, name: 'Oferton pura papa', category: '👨‍👩‍👧‍👦 Ofertas Familiares', price: 23500, description: 'Pollo entero, papas fritas, 1/2 porcion de papa frita y bebidas 1.5lt', image: 'https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400&h=300&fit=crop' },
             { id: 7, name: 'Oferton familiar', category: '👨‍👩‍👧‍👦 Ofertas Familiares', price: 22500, description: 'Pollo entero, papas fritas, ensalada y bebidas 1.5lt', image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400&h=300&fit=crop' },
             { id: 8, name: 'Mega Familiar', category: '👨‍👩‍👧‍👦 Ofertas Familiares', price: 22500, description: 'Pollo entero, papas fritas, ensalada y bebidas 1.5lt', image: 'https://images.unsplash.com/photo-1633504581786-316c8002b1b1?w=400&h=300&fit=crop' },
             
             // OFERTAS PARA DOS
             { id: 9, name: '1/2 combo chaufa', category: '👫 Ofertas para Dos', price: 15600, description: 'Medio pollo, papas fritas, arroz chaufa', image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop' },
-            { id: 10, name: '1/2 combo', category: '���� Ofertas para Dos', price: 15100, description: 'Medio pollo, papas fritas, ensalada personal', image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400&h=300&fit=crop' },
+            { id: 10, name: '1/2 combo', category: '👫 Ofertas para Dos', price: 15100, description: 'Medio pollo, papas fritas, ensalada personal', image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400&h=300&fit=crop' },
             { id: 11, name: '1/2 combo pura papa', category: '👫 Ofertas para Dos', price: 15100, description: 'Medio pollo, papas fritas mas cantidad', image: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&h=300&fit=crop' },
             
             // OFERTAS PERSONALES
             { id: 12, name: '1/4 combo', category: '🧑 Ofertas Personales', price: 8100, description: '1/4 pollo, papas fritas personales, ensalada personal', image: 'https://images.unsplash.com/photo-1594221708779-94832f4320d1?w=400&h=300&fit=crop' },
-            { id: 13, name: '1/4 combo pura papa', category: '��� Ofertas Personales', price: 8100, description: '1/4 pollo, papas fritas personales mas cantidad', image: 'https://images.unsplash.com/photo-1632334342937-2fda8e3448a2?w=400&h=300&fit=crop' },
+            { id: 13, name: '1/4 combo pura papa', category: '🧑 Ofertas Personales', price: 8100, description: '1/4 pollo, papas fritas personales mas cantidad', image: 'https://images.unsplash.com/photo-1632334342937-2fda8e3448a2?w=400&h=300&fit=crop' },
             { id: 14, name: 'Chaufa brasa', category: '🧑 Ofertas Personales', price: 8200, description: '1/4 pollo, arroz chaufa', image: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=300&fit=crop' },
             { id: 15, name: 'Fideo al pesto con 1/4 de pollo', category: '🧑 Ofertas Personales', price: 8100, description: '1/4 pollo, fideos al pesto', image: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop' },
             { id: 16, name: 'Chaufa brasa con papas fritas', category: '🧑 Ofertas Personales', price: 9200, description: '1/4 pollo, papas fritas personal, arroz chaufa', image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop' },
@@ -538,10 +484,10 @@
             { id: 28, name: '1/2 Pollo solo', category: '➕ Agregados', price: 9900, description: '1/2 pollo - parte truto y pechuga', image: 'https://images.unsplash.com/photo-1594221708779-94832f4320d1?w=400&h=300&fit=crop' },
             { id: 29, name: '1/4 pollo solo', category: '➕ Agregados', price: 5800, description: '1/4 de pollo - truto o pechuga - según el stock', image: 'https://images.unsplash.com/photo-1633504581786-316c8002b1b1?w=400&h=300&fit=crop' },
             { id: 30, name: 'Porcion de papas fritas familiar', category: '➕ Agregados', price: 9000, description: 'Porción grande de papas crujientes', image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop' },
-            { id: 31, name: '1/2 porcion de papas fritas', category: '➕ Agregados', price: 6100, description: 'Media Porci��n de papas crujientes', image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop' },
+            { id: 31, name: '1/2 porcion de papas fritas', category: '➕ Agregados', price: 6100, description: 'Media Porción de papas crujientes', image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop' },
             { id: 32, name: 'Porcion de arroz chaufa', category: '➕ Agregados', price: 5300, description: '1 Porción de arroz chaufa', image: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=300&fit=crop' },
             { id: 33, name: 'Porcion de fideos al pesto', category: '➕ Agregados', price: 5300, description: '1 Porción de fideos al pesto', image: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop' },
-            { id: 34, name: 'Porcion de ensalada familiar', category: '���� Agregados', price: 5400, description: 'Ensalada surtida - familiar', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop' },
+            { id: 34, name: 'Porcion de ensalada familiar', category: '➕ Agregados', price: 5400, description: 'Ensalada surtida - familiar', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop' },
             { id: 35, name: 'Porcion de ensalada personal', category: '➕ Agregados', price: 3700, description: 'Ensalada surtida - personal', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop' }
         ];
 
@@ -582,6 +528,10 @@
                     defaultConfig,
                     onConfigChange: async (config) => {
                         document.getElementById('restaurant-title').textContent = `🍗 ${config.restaurant_name || defaultConfig.restaurant_name}`;
+                        const headerTitle = document.getElementById('header-title');
+                        if (headerTitle) {
+                            headerTitle.textContent = `🍗 ${(config.restaurant_name || defaultConfig.restaurant_name).replace('Pollería ', '')}`;
+                        }
                         document.body.style.background = `linear-gradient(135deg, ${config.background_color || defaultConfig.background_color} 0%, ${config.secondary_color || defaultConfig.secondary_color} 100%)`;
                         
                         const stepActive = document.querySelectorAll('.step-active');
@@ -661,6 +611,7 @@
             setupEventListeners();
             renderCategoryFilters();
             renderProducts();
+            renderCategoriesDropdown();
             setMinDate();
         }
 
@@ -705,6 +656,36 @@
                 });
                 
                 timeSlotsContainer.appendChild(slot);
+            });
+        }
+
+        function renderCategoriesDropdown() {
+            const categoriesBody = document.getElementById('categories-dropdown-body');
+            categoriesBody.innerHTML = '';
+            
+            const categories = [
+                { key: 'all', label: '🔥 Todo el Menú' },
+                { key: '👨‍👩‍👧‍👦 Ofertas Familiares', label: '👨‍👩‍����‍👦 Ofertas Familiares' },
+                { key: '👫 Ofertas para Dos', label: '👫 Ofertas para Dos' },
+                { key: '🧑 Ofertas Personales', label: '🧑 Ofertas Personales' },
+                { key: '🍽️ Platos Extras', label: '🍽️ Platos Extras' },
+                { key: '➕ Agregados', label: '➕ Agregados' }
+            ];
+            
+            categories.forEach(cat => {
+                const item = document.createElement('div');
+                item.className = 'category-menu-item';
+                item.textContent = cat.label;
+                item.addEventListener('click', () => {
+                    selectedCategory = cat.key;
+                    renderCategoryFilters();
+                    renderProducts();
+                    document.getElementById('categories-dropdown').style.display = 'none';
+                    
+                    // Scroll to products
+                    document.getElementById('products-list').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+                categoriesBody.appendChild(item);
             });
         }
 
@@ -842,6 +823,7 @@
         function updateCart() {
             let total = 0;
             let totalItems = 0;
+            const MINIMUM_AMOUNT = 200000;
             
             products.forEach(product => {
                 const qty = cart[product.id] || 0;
@@ -853,23 +835,50 @@
                 totalItems += qty;
             });
             
-            document.getElementById('total-price').textContent = `$${total.toLocaleString()}`;
-            document.getElementById('cart-badge').textContent = totalItems;
-            document.getElementById('floating-total').textContent = `$${total.toLocaleString()}`;
+            // Update header cart info
+            const cartBadgeHeader = document.getElementById('cart-badge-header');
+            const progressBarHeader = document.getElementById('progress-bar-header');
+            const remainingAmountHeader = document.getElementById('remaining-amount-header');
+            const progressPercentage = document.getElementById('progress-percentage');
+            const cartTotalDropdown = document.getElementById('cart-total-dropdown');
+            const cartMinimumWarning = document.getElementById('cart-minimum-warning');
             
-            // Show/hide floating cart based on items
-            const floatingCart = document.getElementById('floating-cart');
-            if (currentStep === 3 && totalItems > 0) {
-                floatingCart.style.display = 'block';
-            } else {
-                floatingCart.style.display = 'none';
+            if (cartBadgeHeader) cartBadgeHeader.textContent = totalItems;
+            if (cartTotalDropdown) cartTotalDropdown.textContent = `$${total.toLocaleString()}`;
+            
+            // Update minimum warning in cart dropdown
+            if (cartMinimumWarning) {
+                if (totalItems > 0 && total < MINIMUM_AMOUNT) {
+                    const remaining = MINIMUM_AMOUNT - total;
+                    cartMinimumWarning.style.display = 'block';
+                    cartMinimumWarning.querySelector('div').innerHTML = `⚠️ Monto mínimo para reservas: $${MINIMUM_AMOUNT.toLocaleString()}<br><br>Tu pedido actual: $${total.toLocaleString()}<br>Falta: $${remaining.toLocaleString()} para completar tu reserva`;
+                } else {
+                    cartMinimumWarning.style.display = 'none';
+                }
             }
             
-            renderCartPanel();
+            if (progressBarHeader && remainingAmountHeader && progressPercentage) {
+                const percentage = Math.min((total / MINIMUM_AMOUNT) * 100, 100);
+                progressBarHeader.style.width = `${percentage}%`;
+                progressPercentage.textContent = `${Math.round(percentage)}%`;
+                
+                if (total >= MINIMUM_AMOUNT) {
+                    remainingAmountHeader.textContent = '✅ Mínimo alcanzado';
+                    remainingAmountHeader.style.color = '#16A34A';
+                    progressPercentage.style.color = '#16A34A';
+                } else {
+                    const remaining = MINIMUM_AMOUNT - total;
+                    remainingAmountHeader.textContent = `Faltan $${remaining.toLocaleString()} para mínimo`;
+                    remainingAmountHeader.style.color = 'rgba(0, 0, 0, 0.6)';
+                    progressPercentage.style.color = '#DC2626';
+                }
+            }
+            
+            renderCartDropdown();
         }
 
-        function renderCartPanel() {
-            const cartBody = document.getElementById('cart-panel-body');
+        function renderCartDropdown() {
+            const cartBody = document.getElementById('cart-dropdown-body');
             cartBody.innerHTML = '';
             
             let hasItems = false;
@@ -881,14 +890,14 @@
                     itemDiv.className = 'cart-item';
                     itemDiv.innerHTML = `
                         <div style="flex: 1;">
-                            <div style="font-weight: 800; color: #000000; font-size: 15px; margin-bottom: 6px;">${product.name}</div>
-                            <div style="color: rgba(0, 0, 0, 0.6); font-size: 13px;">$${product.price.toLocaleString()} × ${qty}</div>
+                            <div style="font-weight: 800; color: #000000; font-size: 14px; margin-bottom: 4px;">${product.name}</div>
+                            <div style="color: rgba(0, 0, 0, 0.6); font-size: 12px;">$${product.price.toLocaleString()} × ${qty}</div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <button class="cart-minus" data-id="${product.id}" style="width: 32px; height: 32px; border-radius: 50%; background: rgba(220, 38, 38, 0.1); color: #DC2626; border: 2px solid rgba(220, 38, 38, 0.3); font-size: 18px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.background='#DC2626'; this.style.color='white'" onmouseout="this.style.background='rgba(220, 38, 38, 0.1)'; this.style.color='#DC2626'">−</button>
-                            <span style="font-weight: 900; color: #000000; min-width: 28px; text-align: center; font-size: 16px;">${qty}</span>
-                            <button class="cart-plus" data-id="${product.id}" style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); color: white; border: none; font-size: 18px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 8px rgba(220, 38, 38, 0.4);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">+</button>
-                            <div style="font-weight: 900; color: #DC2626; margin-left: 8px; min-width: 80px; text-align: right; font-size: 16px;">$${(product.price * qty).toLocaleString()}</div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <button class="cart-minus" data-id="${product.id}" style="width: 28px; height: 28px; border-radius: 50%; background: rgba(220, 38, 38, 0.1); color: #DC2626; border: 2px solid rgba(220, 38, 38, 0.3); font-size: 16px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.background='#DC2626'; this.style.color='white'" onmouseout="this.style.background='rgba(220, 38, 38, 0.1)'; this.style.color='#DC2626'">−</button>
+                            <span style="font-weight: 900; color: #000000; min-width: 24px; text-align: center; font-size: 14px;">${qty}</span>
+                            <button class="cart-plus" data-id="${product.id}" style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%); color: white; border: none; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 8px rgba(220, 38, 38, 0.4);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">+</button>
+                            <div style="font-weight: 900; color: #DC2626; margin-left: 8px; min-width: 70px; text-align: right; font-size: 14px;">$${(product.price * qty).toLocaleString()}</div>
                         </div>
                     `;
                     cartBody.appendChild(itemDiv);
@@ -896,10 +905,10 @@
             });
             
             if (!hasItems) {
-                cartBody.innerHTML = '<div style="text-align: center; padding: 60px 20px; color: rgba(0, 0, 0, 0.4); font-size: 16px;">🛒<br><br>Tu carrito está vacío</div>';
+                cartBody.innerHTML = '<div style="text-align: center; padding: 40px 20px; color: rgba(0, 0, 0, 0.4); font-size: 14px;">🛒<br><br>Tu carrito está vacío</div>';
             }
             
-            // Add event listeners for cart panel buttons
+            // Add event listeners for cart dropdown buttons
             document.querySelectorAll('.cart-plus').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const id = parseInt(this.dataset.id);
@@ -948,13 +957,57 @@
                 }
                 goToStep(3);
             });
-
-            document.getElementById('btn-products-back').addEventListener('click', () => goToStep(2));
-            document.getElementById('btn-products-next').addEventListener('click', () => {
+            
+            document.getElementById('btn-categories-menu').addEventListener('click', () => {
+                const panel = document.getElementById('categories-dropdown');
+                if (panel.style.display === 'none' || panel.style.display === '') {
+                    panel.style.display = 'flex';
+                    document.getElementById('cart-dropdown-panel').style.display = 'none';
+                } else {
+                    panel.style.display = 'none';
+                }
+            });
+            
+            document.getElementById('close-categories-dropdown').addEventListener('click', () => {
+                document.getElementById('categories-dropdown').style.display = 'none';
+            });
+            
+            document.getElementById('btn-view-cart').addEventListener('click', () => {
+                const panel = document.getElementById('cart-dropdown-panel');
+                if (panel.style.display === 'none' || panel.style.display === '') {
+                    panel.style.display = 'flex';
+                    document.getElementById('categories-dropdown').style.display = 'none';
+                } else {
+                    panel.style.display = 'none';
+                }
+            });
+            
+            document.getElementById('close-cart-dropdown').addEventListener('click', () => {
+                document.getElementById('cart-dropdown-panel').style.display = 'none';
+            });
+            
+            document.getElementById('btn-continue-to-data').addEventListener('click', () => {
                 if (Object.keys(cart).length === 0) {
                     showInlineMessage('Por favor selecciona al menos un producto', 'products-step');
                     return;
                 }
+                
+                // Calcular total del carrito
+                let total = 0;
+                products.forEach(product => {
+                    const qty = cart[product.id] || 0;
+                    total += qty * product.price;
+                });
+                
+                // Validar monto mínimo de $200,000
+                const MINIMUM_AMOUNT = 200000;
+                if (total < MINIMUM_AMOUNT) {
+                    const remaining = MINIMUM_AMOUNT - total;
+                    showInlineMessage(`⚠️ Monto mínimo para reservas: $200.000\n\nTu pedido actual: $${total.toLocaleString()}\nFalta: $${remaining.toLocaleString()} para completar tu reserva`, 'products-step');
+                    return;
+                }
+                
+                document.getElementById('cart-dropdown-panel').style.display = 'none';
                 updateSummary();
                 goToStep(4);
             });
@@ -969,25 +1022,6 @@
             document.getElementById('btn-new-reservation').addEventListener('click', resetForm);
             
             document.getElementById('btn-home').addEventListener('click', resetForm);
-
-            // Floating cart events
-            document.getElementById('floating-cart-btn').addEventListener('click', () => {
-                document.getElementById('floating-cart-panel').classList.add('open');
-            });
-
-            document.getElementById('close-cart-panel').addEventListener('click', () => {
-                document.getElementById('floating-cart-panel').classList.remove('open');
-            });
-
-            document.getElementById('floating-continue-btn').addEventListener('click', () => {
-                if (Object.keys(cart).length === 0) {
-                    showInlineMessage('Por favor selecciona al menos un producto', 'products-step');
-                    return;
-                }
-                document.getElementById('floating-cart-panel').classList.remove('open');
-                updateSummary();
-                goToStep(4);
-            });
         }
 
         function showInlineMessage(message, stepId) {
@@ -997,8 +1031,8 @@
             
             const msg = document.createElement('div');
             msg.className = 'inline-message';
-            msg.style.cssText = 'background: rgba(220, 38, 38, 0.1); backdrop-filter: blur(10px); color: #DC2626; padding: 16px; border-radius: 12px; margin-bottom: 20px; font-weight: 700; text-align: center; border: 2px solid rgba(220, 38, 38, 0.2); font-size: 15px;';
-            msg.textContent = '⚠️ ' + message;
+            msg.style.cssText = 'background: rgba(220, 38, 38, 0.1); backdrop-filter: blur(10px); color: #DC2626; padding: 20px; border-radius: 12px; margin-bottom: 20px; font-weight: 700; text-align: center; border: 2px solid rgba(220, 38, 38, 0.3); font-size: 15px; line-height: 1.6; white-space: pre-line;';
+            msg.textContent = message;
             step.insertBefore(msg, step.firstChild);
             
             setTimeout(() => {
@@ -1006,7 +1040,7 @@
                 msg.style.transform = 'translateY(-10px)';
                 msg.style.transition = 'all 0.3s';
                 setTimeout(() => msg.remove(), 300);
-            }, 3000);
+            }, 5000);
         }
 
         function showSchedulePage() {
@@ -1095,6 +1129,23 @@
             
             currentStep = step;
             
+            // Show/hide header elements based on step
+            const categoriesBtn = document.getElementById('btn-categories-menu');
+            const viewCartBtn = document.getElementById('btn-view-cart');
+            const progressContainer = document.getElementById('progress-container');
+            
+            if (step === 3) {
+                // Step 3: Show categories menu, cart button visible, progress visible
+                categoriesBtn.style.display = 'block';
+                viewCartBtn.style.display = 'flex';
+                progressContainer.style.display = 'block';
+            } else {
+                // Other steps: Hide categories menu, keep cart visible, hide progress
+                categoriesBtn.style.display = 'none';
+                viewCartBtn.style.display = 'flex';
+                progressContainer.style.display = 'none';
+            }
+            
             // Show/hide home button (only show after step 1)
             const homeBtn = document.getElementById('btn-home');
             if (step > 1) {
@@ -1103,7 +1154,7 @@
                 homeBtn.style.display = 'none';
             }
             
-            // Update floating cart visibility
+            // Update cart
             updateCart();
         }
 
@@ -1194,7 +1245,7 @@
                 `💰 *TOTAL: $${total.toLocaleString()}*`;
             
             const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/${+51900976202}?text=${encodedMessage}`;
+            const whatsappUrl = `https://wa.me/${+51900979202}?text=${encodedMessage}`;
             
             window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
             
@@ -1230,5 +1281,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a67a206a4f6b44e',t:'MTc2NDQ3NzI3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a68153ca6c3e9a5',t:'MTc2NDQ4MTk5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
